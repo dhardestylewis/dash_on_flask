@@ -29,6 +29,7 @@ def login():
 
     form = LoginForm()
     if form.validate_on_submit():
+        db.create_all()
         user = User.query.filter_by(username=form.username.data).first()
         if user is None or not user.check_password(form.password.data):
             error = 'Invalid username or password'
