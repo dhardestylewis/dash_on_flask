@@ -7,7 +7,8 @@ from config import BaseConfig
 
 
 def create_app():
-    server = Flask(__name__)
+    server = Flask(__name__,
+             template_folder='templates/dist')
     server.config.from_object(BaseConfig)
 
     register_dashapps(server)
