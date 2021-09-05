@@ -19,7 +19,7 @@ server_bp = Blueprint('main', __name__)
 
 @server_bp.route('/')
 def index():
-    return render_template("index.html", title='Home Page')
+    return render_template("dist/index.html", title='Home Page')
 
 
 @server_bp.route('/login/', methods=['GET', 'POST'])
@@ -33,7 +33,7 @@ def login():
         user = User.query.filter_by(username=form.username.data).first()
         if user is None or not user.check_password(form.password.data):
             error = 'Invalid username or password'
-            return render_template('login.html', form=form, error=error)
+            return render_template('dist/login.html', form=form, error=error)
 
         login_user(user, remember=form.remember_me.data)
         next_page = request.args.get('next')
@@ -41,7 +41,7 @@ def login():
             next_page = url_for('main.index')
         return redirect(next_page)
 
-    return render_template('login.html', title='Sign In', form=form)
+    return render_template('dist/login.html', title='Sign In', form=form)
 
 
 @server_bp.route('/logout/')
@@ -67,4 +67,4 @@ def register():
 
         return redirect(url_for('main.login'))
 
-    return render_template('register.html', title='Register', form=form)
+    return render_template('dist/register.html', title='Register', form=form)
