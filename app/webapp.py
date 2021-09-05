@@ -14,7 +14,11 @@ from app.forms import LoginForm
 from app.forms import RegistrationForm
 from app.models import User
 
-server_bp = Blueprint('main', __name__)
+server_bp = Blueprint('main',
+        __name__,
+        static_url_path='/assets',
+        static_folder='templates/dist/assets',
+        template_folder='templates/dist')
 
 
 @server_bp.route('/')
@@ -22,7 +26,7 @@ def index():
     return render_template("index.html", title='Home Page')
 
 
-@server_bp.route('/login/', methods=['GET', 'POST'])
+@server_bp.route('/login.html', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('main.index'))
@@ -52,7 +56,7 @@ def logout():
     return redirect(url_for('main.index'))
 
 
-@server_bp.route('/register/', methods=['GET', 'POST'])
+@server_bp.route('/register.html', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
         return redirect(url_for('main.index'))

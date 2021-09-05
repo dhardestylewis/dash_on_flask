@@ -7,10 +7,7 @@ from config import BaseConfig
 
 
 def create_app():
-    server = Flask(__name__,
-             static_url_path='/assets',
-             static_folder='templates/dist/assets',
-             template_folder='templates/dist')
+    server = Flask(__name__)
 
     server.config.from_object(BaseConfig)
 
