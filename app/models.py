@@ -8,6 +8,7 @@ from app.extensions import login
 
 @login.user_loader
 def load_user(id):
+    db.create_all()
     return User.query.get(int(id))
 
 
